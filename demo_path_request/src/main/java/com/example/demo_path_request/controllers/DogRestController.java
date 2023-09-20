@@ -1,3 +1,4 @@
+/*
 package com.example.demo_path_request.controllers;
 import com.example.demo_path_request.exeptions.ResourceNotFoundException;
 import com.example.demo_path_request.models.DogDTO;
@@ -36,3 +37,4 @@ public class DogRestController {
         }
     }
 }
+*/
