@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Contact list</title>
     <span th:replace="~{index :: bootstrapImports}"></span>
 </head>
 <body>
-    <header th:insert="~{index :: nav.nav}"></header>
+    <header class="mb-5" th:insert="~{index :: nav.nav}"></header>
+    <main class="container">
+        <h1 class="bold fs-1">Contact List</h1>
+        <table th:if="${!personsList.isEmpty()}" class="table table-dark table-hover rounded overflow-hidden table-striped text-center align-middle mt-5">
+            <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Options</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${personsList}">
+                    <td th:text="${p.firstName}"></td>
+                    <td th:text="${p.lastName}"></td>
+                    <td th:text="${p.age}"></td>
+                    <td>
+                        <a th:href="@{/persons/{personId}(personId=${p.id})}" class="btn btn-outline-info"><i class="bi bi-eye"></i> Details</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>
