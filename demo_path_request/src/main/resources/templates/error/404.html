@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="../../assets/styles.css">
     <title>404 PAGE NOT FOUND</title>
+    <span th:replace="~{index :: bootstrapImports}"></span>
 </head>
 <body>
-<div id='oops'>
-    <div id='error-text'>
-        <img class="align-item-center" src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="404">
-        <span>404 PAGE</span>
+    <header th:insert="~{index :: nav.nav}"></header>
+    <div id='oops'>
+        <div id='error-text'>
+            <img class="align-item-center" src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="404">
+            <span class="text-danger fs-1 mx-auto bold">404 PAGE</span>
+        </div>
     </div>
-</div>
 </body>
 </html>

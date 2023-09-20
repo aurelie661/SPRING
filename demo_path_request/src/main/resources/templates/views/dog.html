@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <span th:replace="~{index :: bootstrapImports}"></span>
 </head>
 <body>
+<header th:insert="~{index :: nav.nav}"></header>
   <table class="table">
     <thead>
     <tr>
