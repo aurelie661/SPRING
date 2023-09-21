@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -43,5 +44,30 @@ public class PersonController {
         model.addAttribute("mode", "add");
 
         return "views/form";
+    }
+
+    @PostMapping("add")
+    public String addPersonHandler(PersonDTO newPerson){
+        personService.addPerson(newPerson);
+
+        return "redirect:/persons/list";
+    }
+
+    @GetMapping("delete/{personId}")
+    public String deletePersonById(@PathVariable("personId") UUID id,Model model){
+        Optional<PersonDTO> personFound =personService.getPersonById(id);
+
+        if(personFound.isPresent()){
+            model.addAttribute("person", personFound.get());
+            model.addAttribute("mode", "delete");
+            return "views/form";
+        }
+        throw new ResourceNotFoundException();
+    }
+
+    @PostMapping("delete/{personId}")
+    public String deletePersonHandler(@PathVariable("personId")  UUID id){
+        personService.deletePerson(id);
+        return "redirect:/persons/list";
     }
 }

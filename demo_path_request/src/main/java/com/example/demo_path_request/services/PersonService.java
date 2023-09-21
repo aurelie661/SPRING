@@ -48,12 +48,21 @@ public class PersonService {
                 .filter(p -> p.getId().equals(id))
                 .findFirst();
     }
+    public void addPerson(PersonDTO newPerson) {
+        if(newPerson.getId() == null){
+            newPerson.setId(UUID.randomUUID());
+        }
+        persons.put(newPerson.getId(),newPerson);
 
-    public PersonDTO getPersonByIdBis(UUID id) {
-        return persons.values()
-                .stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    }
+
+    public boolean deletePerson(UUID id) {
+        Optional<PersonDTO> personFound = getPersonById(id);
+
+        if(personFound.isPresent()){
+            personFound.ifPresent(personDTO -> persons.remove(personDTO.getId()));
+            return true;
+        }
+        return false;
     }
 }

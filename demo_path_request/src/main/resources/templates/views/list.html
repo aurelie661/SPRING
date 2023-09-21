@@ -25,10 +25,17 @@
                     <td th:text="${p.age}"></td>
                     <td>
                         <a th:href="@{/persons/{personId}(personId=${p.id})}" class="btn btn-outline-info"><i class="bi bi-eye"></i> Details</a>
+                        <a th:href="@{/persons/edit/{personId}(personId=${p.id})}" class="btn btn-outline-warning"><i class="bi bi-pen"></i> Edit</a>
+                        <a th:href="@{/persons/delete/{personId}(personId=${p.id})}" class="btn btn-outline-danger"><i class="bi bi-trash3"></i> Delete</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <p th:if="${personsList.isEmpty()}">There is no contact in the database yet!</p>
+        <hr>
+        <div class="text-end">
+            <a th:href="@{/persons/add}" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a Person</a>
+        </div>
     </main>
 </body>
 </html>

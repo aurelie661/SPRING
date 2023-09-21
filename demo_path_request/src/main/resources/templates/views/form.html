@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <span th:replace="~{index :: bootstrapImports}"></span>
-    <title th:text="${(mode.equals('details') ? 'View' : 'Add') + ' a Person'}"></title>
+    <span th:replace="~{index :: styles}"></span>
+    <title>Form contact</title>
 </head>
 <body>
     <header class="mb-5" th:insert="~{index :: nav.nav}"></header>
     <main class="container">
-        <h1 th:text="${(mode.equals('details') ? 'View' : 'Add') + ' a Person'}"></h1>
+        <h1 th:switch="${mode}">
+            <span th:case="details">View a person</span>
+            <span th:case="add">Add a person</span>
+            <span th:case="delete">Delete a person</span>
+            <span th:case="edit">Edit a person</span>
+        </h1>
         <hr>
-        <form action="#" th:action="@{/persons/add}" method="post" th:object="${person}">
-            <input type="text" class="d-none" th:field="*{id}" readonly>
+        <form action="#" th:action="@{/persons/{mode}/{id} (mode=${mode},id=${person.id})}"  method="post" th:object="${person}">
+            <label>
+                <input type="text" class="d-none" th:field="*{id}" readonly>
+            </label>
             <div class="mb-3">
                 <label for="name" class="form-label">First Name:</label>
                 <input type="text" id="name" class="form-control" th:field="*{firstName}" th:readonly="${mode.equals('details')}" th:required="${mode.equals('add')}">
@@ -26,7 +34,11 @@
             </div>
             <div class="text-end">
                 <a th:if="${mode.equals('details')}" class="btn btn-secondary" th:href="@{/persons/list}"><i class="bi bi-arrow-counterclockwise"></i> Return</a>
-                <button th:unless="${mode.equals('details')}" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a Person</button>
+                <button th:switch="${mode}">
+                    <span th:case="add" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a person</span>
+                    <span th:case="delete" class="btn btn-danger"><i class="bi bi-x-lg"></i> Delete</span>
+                    <span th:case="edit" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit </span>
+                </button>
             </div>
         </form>
     </main>
