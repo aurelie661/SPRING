@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <span th:replace="~{index :: bootstrapImports}"></span>
+    <title th:text="${(mode.equals('details') ? 'View' : 'Add') + ' a Person'}"></title>
+</head>
+<body>
+    <header class="mb-5" th:insert="~{index :: nav.nav}"></header>
+    <main class="container">
+        <h1 th:text="${(mode.equals('details') ? 'View' : 'Add') + ' a Person'}"></h1>
+        <hr>
+        <form action="#" th:action="@{/persons/add}" method="post" th:object="${person}">
+            <input type="text" class="d-none" th:field="*{id}" readonly>
+            <div class="mb-3">
+                <label for="name" class="form-label">First Name:</label>
+                <input type="text" id="name" class="form-control" th:field="*{firstName}" th:readonly="${mode.equals('details')}" th:required="${mode.equals('add')}">
+            </div>
+            <div class="mb-3">
+                <label for="breed" class="form-label">Last Name:</label>
+                <input type="text" id="breed" class="form-control" th:field="*{lastName}" th:readonly="${mode.equals('details')}" th:required="${mode.equals('add')}">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Age:</label>
+                <input type="number" min="0" max="50" id="age" class="form-control" th:field="*{age}" th:readonly="${mode.equals('details')}" th:required="${mode.equals('add')}">
+            </div>
+            <div class="text-end">
+                <a th:if="${mode.equals('details')}" class="btn btn-secondary" th:href="@{/persons/list}"><i class="bi bi-arrow-counterclockwise"></i> Return</a>
+                <button th:unless="${mode.equals('details')}" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a Person</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
