@@ -16,7 +16,7 @@
             <span th:case="edit">Edit a person</span>
         </h1>
         <hr>
-        <form action="#" th:action="@{/persons/{mode}/{id} (mode=${mode},id=${person.id})}"  method="post" th:object="${person}">
+        <form action="#" th:action="@{/persons/{mode}{id} (mode=${mode},id=${mode == 'add' ? null : '/' + person.id})}"  method="post" th:object="${person}">
             <label>
                 <input type="text" class="d-none" th:field="*{id}" readonly>
             </label>
@@ -34,10 +34,10 @@
             </div>
             <div class="text-end">
                 <a th:if="${mode.equals('details')}" class="btn btn-secondary" th:href="@{/persons/list}"><i class="bi bi-arrow-counterclockwise"></i> Return</a>
-                <button th:switch="${mode}">
+                <button th:unless="${mode.equals('details')}" th:switch="${mode}">
                     <span th:case="add" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a person</span>
                     <span th:case="delete" class="btn btn-danger"><i class="bi bi-x-lg"></i> Delete</span>
-                    <span th:case="edit" class="btn btn-warning"><i class="bi bi-pencil-fill"></i> Edit </span>
+                    <span th:case="edit" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i> Edit </span>
                 </button>
             </div>
         </form>

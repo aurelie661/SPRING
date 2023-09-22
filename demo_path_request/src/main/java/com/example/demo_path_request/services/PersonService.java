@@ -3,6 +3,7 @@ import com.example.demo_path_request.models.PersonDTO;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Primary
@@ -64,5 +65,27 @@ public class PersonService {
             return true;
         }
         return false;
+    }
+
+    public PersonDTO editPerson(UUID id, PersonDTO personDTO){
+        AtomicReference<PersonDTO> personDTOAtomicReference = new AtomicReference<>();
+
+        Optional<PersonDTO> personDTOOptional = getPersonById(id);
+
+        personDTOOptional.ifPresentOrElse(found ->{
+            if(personDTO.getFirstName() != null){
+                found.setFirstName(personDTO.getFirstName());
+            }
+            if(personDTO.getLastName() != null){
+                found.setLastName(personDTO.getLastName());
+            }
+            if(personDTO.getAge() != null){
+                found.setAge(personDTO.getAge());
+            }
+            personDTOAtomicReference.set(found);
+        }, () -> {
+            personDTOAtomicReference.set(null);
+        });
+    return personDTOAtomicReference.get();
     }
 }

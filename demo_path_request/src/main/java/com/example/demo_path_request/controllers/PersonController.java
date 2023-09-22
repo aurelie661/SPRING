@@ -70,4 +70,25 @@ public class PersonController {
         personService.deletePerson(id);
         return "redirect:/persons/list";
     }
+
+    @GetMapping("edit/{personId}")
+    public String editPerson(@PathVariable("personId") UUID id, Model model){
+
+        Optional<PersonDTO> personDTOOptional = personService.getPersonById(id);
+
+        if(personDTOOptional.isPresent()){
+            model.addAttribute("person", personDTOOptional.get());
+            model.addAttribute("mode", "edit");
+            return "views/form";
+        }
+        throw new ResourceNotFoundException();
+    }
+
+    @PostMapping("edit/{personId}")
+    public String editPersonHandler(@PathVariable("personId") UUID id, PersonDTO personDTO){
+
+        personService.editPerson(id,personDTO);
+
+        return "redirect:/persons/list";
+    }
 }
