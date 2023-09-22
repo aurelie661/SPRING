@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <span th:replace="~{index :: bootstrapImports}"></span>
     <span th:replace="~{index :: styles}"></span>
-    <title>Form contact</title>
+    <th:block th:switch="${mode}">
+        <title th:case="details">View details</title>
+        <title th:case="add">Add a person</title>
+        <title th:case="delete">Delete</title>
+        <title th:case="edit">Edit this person</title>
+    </th:block>
 </head>
 <body>
     <header class="mb-5" th:insert="~{index :: nav.nav}"></header>
     <main class="container">
         <th:block th:switch="${mode}">
-            <h1 th:case="details">View a person</h1>
+            <h1 th:case="details">View details </h1>
             <h1 th:case="add">Add a person</h1>
             <h1 th:case="delete">Delete a person</h1>
-            <h1 th:case="edit">Edit a person</h1>
+            <h1 th:case="edit">Edit this person</h1>
         </th:block>
         <hr>
         <form action="#" th:action="@{/persons/{mode}{id} (mode=${mode},id=${mode == 'add' ? null : '/' + person.id})}"  method="post" th:object="${person}">
