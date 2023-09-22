@@ -25,14 +25,14 @@ MapStruct.
 
 L'application devra désormais comprendre également, via un paramètre de requête optionnel, la capacité à faire une recherche par valeur textuelle débutant par XXX
 
-Exercice Spring D
+## Partie D :
  
 Etendre l'application réalisée durant l'exercice C pour lui permettre de réaliser un CRUD complet, que ce soit via une API ou via l'interface Web. 
 
-Exercice Spring E
+## Partie E :
  
 Ajouter à l'application réalisée précédemment la couche de données via l'utilisation de Spring Data JPA ainsi que d'une base de données H2. Le mapping des DTO vers les entités sera réalisé via MapStruct.L'application devra désormais comprendre également, via un paramètre de requête optionnel, la capacité à faire une recherche par valeur textuelle débutant par XXX
 
-Exercice Spring F
+## Partie F :
  
 Ajouter à l'application déjà effectuée la capacité de gérer la validation, en retournant en cas de mauvaise requête en API une erreur personnalisée ou dans le cas d'un envoi de formulaire depuis la WebApp l'affichage des champs posant soucis. De plus, faites en sorte de décentraliser la gestion des erreurs via un contrôleur prévu à cet effet.
