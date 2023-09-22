@@ -9,12 +9,12 @@
 <body>
     <header class="mb-5" th:insert="~{index :: nav.nav}"></header>
     <main class="container">
-        <h1 th:switch="${mode}">
-            <span th:case="details">View a person</span>
-            <span th:case="add">Add a person</span>
-            <span th:case="delete">Delete a person</span>
-            <span th:case="edit">Edit a person</span>
-        </h1>
+        <th:block th:switch="${mode}">
+            <h1 th:case="details">View a person</h1>
+            <h1 th:case="add">Add a person</h1>
+            <h1 th:case="delete">Delete a person</h1>
+            <h1 th:case="edit">Edit a person</h1>
+        </th:block>
         <hr>
         <form action="#" th:action="@{/persons/{mode}{id} (mode=${mode},id=${mode == 'add' ? null : '/' + person.id})}"  method="post" th:object="${person}">
             <label>
@@ -34,11 +34,11 @@
             </div>
             <div class="text-end">
                 <a th:if="${mode.equals('details')}" class="btn btn-secondary" th:href="@{/persons/list}"><i class="bi bi-arrow-counterclockwise"></i> Return</a>
-                <button th:unless="${mode.equals('details')}" th:switch="${mode}">
-                    <span th:case="add" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a person</span>
-                    <span th:case="delete" class="btn btn-danger"><i class="bi bi-x-lg"></i> Delete</span>
-                    <span th:case="edit" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i> Edit </span>
-                </button>
+                <th:block th:unless="${mode.equals('details')}" th:switch="${mode}">
+                    <button th:case="add" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add a person</button>
+                    <button th:case="delete" class="btn btn-danger"><i class="bi bi-x-lg"></i> Delete</button>
+                    <button th:case="edit" class="btn btn-secondary"><i class="bi bi-pencil-fill"></i> Edit </button>
+                </th:block>
             </div>
         </form>
     </main>
