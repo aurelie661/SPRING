@@ -17,16 +17,17 @@ public class PokemonRestController {
     private final PokeService pokeService;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @GetMapping("/")
+    @GetMapping("/api/v2/")
     public String home() {
         return "index";
     }
 
-    @GetMapping("/pokemon/{id}")
-    public String getPokemon(@PathVariable String id, Model model) {
-        Pokemon pokemon = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + id, Pokemon.class);
+    @GetMapping("pokemon/{id}")
+    public String getPokemon(@PathVariable int id, Model model) {
+
+        Pokemon pokemon= pokeService.getById(id);
         model.addAttribute("pokemon", pokemon);
-        pokeService.getById(Integer.parseInt(id));
+
         return "pokemon";
     }
 

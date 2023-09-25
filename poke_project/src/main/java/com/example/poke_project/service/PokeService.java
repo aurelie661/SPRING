@@ -23,18 +23,15 @@ public class PokeService {  private final RestTemplateBuilder builder;
 
         ResponseEntity<JsonNode> responseJson = restTemplate
                 .getForEntity("pokemon/" + id, JsonNode.class);
-
+/*
         List<String> abilityNames = new ArrayList<>();
 
         int pokeFound = Objects.requireNonNull(responseJson.getBody()).get("id").asInt();
 
         responseJson.getBody().findPath("abilities").elements().forEachRemaining(a -> {
             abilityNames.add(a.findPath("ability").get("name").asText());
-        });
+        });*/
 
-        return Pokemon
-                .builder()
-                .abilities(null)
-                .build();
+        return Pokemon.builder().build();
     }
 }
