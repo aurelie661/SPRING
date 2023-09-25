@@ -8,7 +8,7 @@
   <h1>Détails du Pokémon</h1>
     <div>
       <h2 th:text="${pokemon.name}"></h2>
-      <p th:text="'Numéro de Pokédex : ' + ${pokemon.nationalPokedexNumber}"></p>
+      <p th:text="'Numéro de Pokédex : ' + ${pokemon.id}"></p>
       <p th:text="'Types : ' + ${pokemon.types}"></p>
       <p th:text="'Capacités : ' + ${pokemon.abilities}"></p>
       <img th:src="${pokemon.imageUrl}" alt="Image du Pokémon">

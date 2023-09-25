@@ -10,16 +10,12 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @Configuration
 public class RestTemplateBuilderConfig {
-    @Value("${base.url.pokeApi}")
-    private String rootUrl;
-
     @Bean
     RestTemplateBuilder restTemplateBuilder(RestTemplateBuilderConfigurer configurer) {
-        RestTemplateBuilder builder = configurer.configure(new RestTemplateBuilder());
+        RestTemplateBuilder restTemplateBuilder = configurer.configure(new RestTemplateBuilder());
 
-        DefaultUriBuilderFactory uriBuilderFactory =
-                new DefaultUriBuilderFactory(rootUrl);
+        DefaultUriBuilderFactory uriBuilderFactory = new DefaultUriBuilderFactory("https://pokeapi.co/api/v2/");
 
-        return builder.uriTemplateHandler(uriBuilderFactory);
+        return restTemplateBuilder.uriTemplateHandler(uriBuilderFactory);
     }
 }

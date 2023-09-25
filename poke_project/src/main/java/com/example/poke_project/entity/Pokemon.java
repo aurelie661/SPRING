@@ -11,6 +11,7 @@ import java.awt.*;
 @Builder
 public class Pokemon {
     private String name;
+    private Long id;
     private int nationalPokedexNumber;
     private List types;
     private List abilities;
